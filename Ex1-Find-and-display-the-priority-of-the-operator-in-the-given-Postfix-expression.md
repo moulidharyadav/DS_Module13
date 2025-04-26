@@ -19,7 +19,8 @@ To write a C program to find and display the priority of the operator in the giv
 Program to find and display the priority of the operator in the given Postfix expression
 Developed by: G MOULIDHAR
 RegisterNumber:212223240042
-#include<stdio.h> #include<ctype.h>
+#include<stdio.h>
+#include<ctype.h>
 
 char stack[100]; int top = -1;
 void push(char x)
