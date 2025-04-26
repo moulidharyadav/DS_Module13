@@ -1,98 +1,67 @@
 # EX 1A Display operator precedence in the infix expression.
-## DATE:23.02.25
+## DATE:22.02.25
 ## AIM:
 To write a C program to find and display the priority of the operator in the given Postfix expression
 
 ## Algorithm
 1.	Start the program.
-2.	Initialize a stack and set the top index to -1.
-3.	Define the push() and pop() functions to add and remove elements from the stack.
-4.	Define the priority() function to assign priorities to operators.
-5.	Traverse the expression in the IntoPost() function, handling operands, parentheses, and operators.
-6.	After processing the expression, pop and print any remaining operators from the stack.
-7.	End
+2.	Define the priority() function to return the priority of operators.
+3.	Initialize the string containing operators and operands.
+4.	Loop through each character in the string.
+5.	For each operator, call the priority() function to determine its priority.
+6.	Print the operator and its corresponding priority level.
+7.	End.
 
-
-## Program:
 ```
 /*
 Program to find and display the priority of the operator in the given Postfix expression
 Developed by: G MOULIDHAR
 RegisterNumber:212223240042
-#include<stdio.h>
-#include<ctype.h>
-
-char stack[100]; int top = -1;
-void push(char x)
-{
-stack[++top]=x;
-
-}
-
-char pop()
-{
-if(top==-1) return 0;
-else
-return stack[top--];
-}
+#include <stdio.h> #include<string.h>
 int priority(char x)
 {
-if(x=='(')
- 
-{
+if(x == '&' || x == '|') return 1;
+if(x == '+' || x == '-') return 2;
+if(x == '*' || x == '/' || x == '%') return 3;
+if(x == '^') return 4;
 return 0;
-}
-if(x=='&'||x=='|')
-{
-return 1;
-}
-if(x=='+'||x=='-')
-{
-return 2;
-}
-if(x=='*'||x=='/'||x=='%')
-{
-return 3;
-}
-if(x=='^')
-{
-return 4;
-}
-return 0;
-}
-char IntoPost(char *exp)
-{
-char *e,x; e=exp; while(*e!='\0')
-{
-if(isalnum(*e))
-{
-printf("%c ",*e);
-}
-else if(*e=='(')
-{
-push(*e);
-}
-else if(*e==')')
-{
-while((x=pop())!='(') printf("%c ",x);
-}
-else
-{
-while(priority(stack[top])>=priority(*e)) printf("%c ",pop());
-push(*e);
-}
-e++;
-}
- 
-while(top != -1)
-{
-printf("%c ",pop());
-}return 0;
 }
 int main()
 {
-char exp[100]="3%2+4*(A&B)"; IntoPost(exp);
-return 1;
+int i,j;
+ 
+char ch[100]="(A*B)^C+(D%H)/F&G";
+
+for(i=0;i<strlen(ch);i++)
+{
+if(ch[i]=='+'||
+ch[i]=='-'||
+ch[i]=='*'||
+ch[i]=='/'||
+ch[i]=='%'||
+ch[i]=='^'||
+ch[i]=='&'||
+ch[i]=='|')
+{
+j=priority(ch[i]); switch(j)
+{
+case 1:
+printf("%c	> ",ch[i]);
+printf("Lowest Priority\n"); break;
+case 2:
+printf("%c	> ",ch[i]);
+printf("Second Lowest Priority\n"); break;
+case 3:
+printf("%c	> ",ch[i]);
+printf("Second Highest Priority\n"); break;
+case 4:
+printf("%c	> ",ch[i]);
+printf("Highest Priority\n"); break;
+}
+}
+}
+
+return 0;
 }
 
 
@@ -100,7 +69,7 @@ return 1;
 ```
 
 ## Output:
-![image](https://github.com/user-attachments/assets/6d0ca770-1217-4f4b-8b1a-46b3806e9100)
+![image](https://github.com/user-attachments/assets/905ecfbf-01b0-400f-a0b5-fa25493ea301)
 
 
 
